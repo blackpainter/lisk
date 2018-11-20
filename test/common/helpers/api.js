@@ -56,11 +56,10 @@ var http = {
 					'> Response:'.grey,
 					JSON.stringify(res ? res.body : err)
 				);
-				done(err, res);
+				return done(err, res);
 			});
-		} else {
-			return request;
 		}
+		return request;
 	},
 
 	// Get the given path
@@ -97,7 +96,7 @@ function httpCallbackHelperWithStatus(cb, err, res) {
 	if (err) {
 		return cb(err);
 	}
-	cb(null, {
+	return cb(null, {
 		status: res.status,
 		body: res.body,
 	});
@@ -107,14 +106,14 @@ function httpCallbackHelper(cb, err, res) {
 	if (err) {
 		return cb(err);
 	}
-	cb(null, res.body);
+	return cb(null, res.body);
 }
 
 function httpResponseCallbackHelper(cb, err, res) {
 	if (err) {
 		return cb(err);
 	}
-	cb(null, res);
+	return cb(null, res);
 }
 
 function getNotFoundEndpoint(cb) {

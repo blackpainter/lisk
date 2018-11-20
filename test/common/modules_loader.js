@@ -299,7 +299,11 @@ var modulesLoader = new function() {
 				if (err) {
 					return cb(err, __cache);
 				}
-				this.initModule(Cache, _.merge(this.scope, { cache: __cache }), cb);
+				return this.initModule(
+					Cache,
+					_.merge(this.scope, { cache: __cache }),
+					cb
+				);
 			}
 		);
 	};
